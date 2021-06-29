@@ -112,7 +112,7 @@ public class PremierLeagueDAO {
 	}
 
 	public List<Player> getVertici(Match m, Map<Integer, Player> idMap) {
-		String sql="SELECT PlayerID FROM actions WHERE MatchID=?";
+		String sql="SELECT DISTINCT PlayerID FROM actions WHERE MatchID=?";
 		List<Player> result= new ArrayList<>();
 		Connection conn = DBConnect.getConnection();
 		try {
@@ -138,7 +138,7 @@ public class PremierLeagueDAO {
 				+ "FROM actions a1, actions a2 "
 				+ "WHERE a1.MatchID=a2.MatchID AND a1.MatchID=? "
 				+ "		AND a1.PlayerID>a2.PlayerID "
-				+ "		AND a1.TeamID<>a2.TeamID";
+				+ "		AND a1.TeamID<>a2.TeamID"; //collego solo agli avvversari
 		List<Adiacenza> result= new ArrayList<>();
 		Connection conn = DBConnect.getConnection();
 		try {
